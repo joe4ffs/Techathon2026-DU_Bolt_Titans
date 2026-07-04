@@ -21,6 +21,29 @@ both reading from a single shared backend (one source of truth for device state)
 npm install
 ```
 
+## Running the backend
+
+```bash
+cd packages/backend
+cp .env.example .env   # optional — defaults work out of the box
+npm run dev
+```
+
+This starts a real server:
+- REST API at `http://localhost:3001/api/...`
+- WebSocket at `ws://localhost:3001/ws`
+
+Try it:
+```bash
+curl http://localhost:3001/api/devices
+curl http://localhost:3001/api/usage
+curl http://localhost:3001/api/alerts
+```
+
+The simulated clock runs 300x faster than real time by default (configurable
+via `SIM_SPEED_MULTIPLIER` in `.env`), so a full simulated day — and every
+alert condition — cycles within a few real minutes.
+
 ## Testing
 
 ```bash
