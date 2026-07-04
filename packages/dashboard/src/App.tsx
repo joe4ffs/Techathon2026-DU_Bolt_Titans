@@ -29,11 +29,12 @@ export default function App() {
 
           <main className={styles.main}>
             <DeviceStatusPanel devices={devices} />
-            <div className={styles.sideColumn}>
-              <PowerMeter usage={usage} />
-              <AlertsPanel alerts={alerts} />
-            </div>
+            <PowerMeter usage={usage} />
           </main>
+
+          <div className={styles.alertsRow}>
+            <AlertsPanel alerts={alerts} />
+          </div>
         </>
       ) : (
         <div className={styles.loading} role="status">

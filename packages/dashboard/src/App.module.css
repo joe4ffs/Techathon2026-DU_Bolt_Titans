@@ -70,10 +70,8 @@
   align-items: start;
 }
 
-.sideColumn {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
+.alertsRow {
+  margin-top: var(--space-5);
 }
 
 @media (max-width: 800px) {
