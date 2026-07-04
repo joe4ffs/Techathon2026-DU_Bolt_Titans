@@ -44,6 +44,16 @@ The simulated clock runs 300x faster than real time by default (configurable
 via `SIM_SPEED_MULTIPLIER` in `.env`), so a full simulated day — and every
 alert condition — cycles within a few real minutes.
 
+## Running the dashboard
+
+In a second terminal, with the backend already running:
+```bash
+cd packages/dashboard
+cp .env.example .env   # optional — defaults to ws://localhost:3001/ws
+npm run dev
+```
+Open the URL Vite prints (typically `http://localhost:5173`).
+
 ## Testing
 
 ```bash
