@@ -111,4 +111,43 @@ describe("UsageAccumulator", () => {
     const sampled = acc.sample(500);
     expect(acc.getTotal()).toBe(sampled);
   });
+
+  it("resets to (near) 0 when crossing a simulated UTC day boundary", () => {
+    const clock = manualClock(new Date("2026-01-01T23:00:00.000Z").getTime());
+    const acc = new UsageAccumulator(clock);
+
+    clock.advance(30 * 60 * 1000); // 30 min -> 23:30, still Jan 1
+    acc.sample(1000);
+
+    clock.advance(60 * 60 * 1000); // +1hr -> 00:30 Jan 2, crosses midnight
+    const afterReset = acc.sample(1000);
+
+    // Should reflect only time since the reset, not the pre-midnight total too
+    expect(afterReset).toBeLessThan(0.6); // well under what pre-midnight alone would've added
+  });
+
+  it("continues accumulating normally for the new day after a reset", () => {
+    const clock = manualClock(new Date("2026-01-01T23:55:00.000Z").getTime());
+    const acc = new UsageAccumulator(clock);
+
+    clock.advance(10 * 60 * 1000); // crosses into Jan 2 at 00:05
+    acc.sample(1000); // triggers reset, lastSampleMs reset to now
+
+    clock.advance(3_600_000); // +1hr fully within Jan 2
+    const total = acc.sample(1000);
+
+    expect(total).toBeCloseTo(1, 5); // 1000W for 1hr = 1 kWh, cleanly within the new day
+  });
+
+  it("does not reset when staying within the same simulated day", () => {
+    const clock = manualClock(new Date("2026-01-01T10:00:00.000Z").getTime());
+    const acc = new UsageAccumulator(clock);
+
+    clock.advance(3_600_000);
+    acc.sample(1000);
+    clock.advance(3_600_000);
+    const total = acc.sample(1000);
+
+    expect(total).toBeCloseTo(2, 5); // both hours counted, no reset
+  });
 });
