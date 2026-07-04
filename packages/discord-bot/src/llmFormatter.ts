@@ -79,7 +79,7 @@ export class AnthropicLlmFormatter implements LlmClient {
 
 /** Passes text through unchanged — used when no LLM formatting is desired at all. */
 export class PassthroughLlmFormatter implements LlmClient {
-  async humanize(factualText: string): Promise<string> {
+  async humanize(factualText: string, _context: string): Promise<string> {
     return factualText;
   }
 }

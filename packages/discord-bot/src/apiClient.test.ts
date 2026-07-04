@@ -2,13 +2,13 @@ import { describe, it, expect, vi } from "vitest";
 import { ApiClient } from "./apiClient.js";
 
 function fakeFetch(status: number, body: unknown) {
-  return vi.fn(async (_url: string) => {
+  return vi.fn(async (_url: string | URL | Request) => {
     return {
       ok: status >= 200 && status < 300,
       status,
       json: async () => body,
     } as Response;
-  });
+  }) as unknown as typeof fetch;
 }
 
 describe("ApiClient", () => {
