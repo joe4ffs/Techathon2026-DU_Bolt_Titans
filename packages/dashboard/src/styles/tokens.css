@@ -1,0 +1,36 @@
+:root {
+  /* Blueprint-schematic palette. Base is a deep blueprint navy, not near-black —
+     deliberately distinct from the generic "dark mode + single neon accent" look.
+     Amber reads as a lit panel LED (device ON); cyan is the structural/data
+     accent; red is reserved exclusively for alerts. */
+  --bg-base: #0e2340;
+  --bg-panel: #123255;
+  --bg-panel-raised: #16406b;
+  --grid-line: rgba(103, 232, 249, 0.08);
+  --line-structural: #3a6690;
+  --line-structural-bright: #5a8ab5;
+
+  --text-primary: #e8f1f8;
+  --text-secondary: #8fb3d1;
+  --text-dim: #5c7fa0;
+
+  --accent-on: #f5a623;
+  --accent-on-glow: rgba(245, 166, 35, 0.55);
+  --accent-alert: #f0544f;
+  --accent-alert-glow: rgba(240, 84, 79, 0.45);
+  --accent-cyan: #67e8f9;
+
+  --font-display: "IBM Plex Mono", "Courier New", monospace;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-data: "IBM Plex Mono", "Courier New", monospace;
+
+  --radius-panel: 2px;
+  --border-width: 1px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+}
