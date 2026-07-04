@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { createInitialDevices, ROOM_IDS, WATTAGE } from "./devices.js";
+import {
+  createInitialDevices,
+  ROOM_IDS,
+  ROOM_LABELS,
+  WATTAGE,
+} from "./devices.js";
 
 describe("createInitialDevices", () => {
   it("creates exactly 15 devices", () => {
@@ -55,5 +60,22 @@ describe("createInitialDevices", () => {
     const devices = createInitialDevices();
     const parsed = Date.parse(devices[0].lastChanged);
     expect(Number.isNaN(parsed)).toBe(false);
+  });
+
+  it("assigns human-readable labels like 'Fan 1' and 'Light 3', unique within each room", () => {
+    const devices = createInitialDevices();
+    for (const room of ROOM_IDS) {
+      const roomDevices = devices.filter((d) => d.room === room);
+      const labels = roomDevices.map((d) => d.label);
+      expect(labels.sort()).toEqual(
+        ["Fan 1", "Fan 2", "Light 1", "Light 2", "Light 3"].sort()
+      );
+    }
+  });
+
+  it("has a ROOM_LABELS entry for every RoomId", () => {
+    for (const room of ROOM_IDS) {
+      expect(ROOM_LABELS[room]).toBeTruthy();
+    }
   });
 });

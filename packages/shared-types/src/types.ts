@@ -5,6 +5,7 @@ export type DeviceStatus = "on" | "off";
 export interface Device {
   id: string; // e.g. "work1-fan-1"
   type: DeviceType;
+  label: string; // human-readable, e.g. "Fan 1" (scoped to its room)
   room: RoomId;
   status: DeviceStatus;
   wattage: number; // rated draw when ON

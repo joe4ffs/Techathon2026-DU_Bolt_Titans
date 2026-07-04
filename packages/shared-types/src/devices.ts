@@ -2,6 +2,17 @@ import type { Device, RoomId, DeviceType } from "./types.js";
 
 export const ROOM_IDS: RoomId[] = ["drawing", "work1", "work2"];
 
+export const ROOM_LABELS: Record<RoomId, string> = {
+  drawing: "Drawing Room",
+  work1: "Work Room 1",
+  work2: "Work Room 2",
+};
+
+export const TYPE_LABELS: Record<DeviceType, string> = {
+  fan: "Fan",
+  light: "Light",
+};
+
 export const WATTAGE: Record<DeviceType, number> = {
   fan: 60,
   light: 15,
@@ -27,6 +38,7 @@ export function createInitialDevices(
         devices.push({
           id: `${room}-${type}-${i}`,
           type,
+          label: `${TYPE_LABELS[type]} ${i}`,
           room,
           status: "off",
           wattage: WATTAGE[type],
