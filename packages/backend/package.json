@@ -6,12 +6,19 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "dev": "tsx src/index.ts"
   },
   "dependencies": {
-    "@office-monitor/shared-types": "*"
+    "@office-monitor/shared-types": "*",
+    "@fastify/cors": "^9.0.1",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
+    "@types/ws": "^8.5.12",
+    "tsx": "^4.19.0",
     "vitest": "^2.0.5",
     "typescript": "^5.5.4"
   }
