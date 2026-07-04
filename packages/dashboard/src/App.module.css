@@ -54,6 +54,15 @@
   margin-bottom: var(--space-5);
 }
 
+.loading {
+  font-family: var(--font-data);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: var(--space-6) 0;
+}
+
 .main {
   display: grid;
   grid-template-columns: 2fr 1fr;

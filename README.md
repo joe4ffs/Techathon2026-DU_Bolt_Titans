@@ -89,8 +89,50 @@ npm run dev
 npm test
 ```
 
-Runs the test suite for every package via npm workspaces.
+Runs the test suite for every package via npm workspaces. 154 tests across
+4 packages as of this writing.
 
-## Development
+## Requirements checklist
 
-(Run instructions for each service are added here as each package comes online.)
+**Simulated device data**
+- [x] 15 devices (3 rooms × 2 fans + 3 lights), realistic wattage (fan 60W, light 15W)
+- [x] Status, wattage, room, and last-changed timestamp per device
+- [x] Data changes dynamically over time via a tick-based simulator
+
+**Web dashboard**
+- [x] Live device status panel, grouped by room, updates without page refresh (WebSocket)
+- [x] Live power meter — total wattage + per-room breakdown
+- [x] Active alerts panel, timestamped
+- [x] Bonus: animated top-down office floor plan — lights glow, fans spin, live
+
+**Discord bot**
+- [x] `!status` — full office summary
+- [x] `!room <name>` — single room status
+- [x] `!usage` — current wattage + estimated kWh today
+- [x] Reads from the same backend as the dashboard (single source of truth)
+- [x] LLM-humanized responses (optional `ANTHROPIC_API_KEY`), with graceful
+      fallback to plain factual text if unset or the API call fails
+
+**Architecture**
+- [x] Single backend (Fastify REST + WebSocket) is the only source of device
+      state; both the dashboard and bot are pure clients of it
+
+**Alerts**
+- [x] After-hours: device left ON outside 9AM–5PM
+- [x] Room continuous-on: all devices in a room ON continuously for 2+ hours
+
+**Not yet done**
+- [ ] System diagram
+- [ ] Circuit schematic (Wokwi/Tinkercad)
+- [ ] Demo video
+
+## A note on the simulated clock for anyone running a demo
+
+The backend's clock runs 300x faster than real time by default (see
+`SIM_SPEED_MULTIPLIER` in `packages/backend/.env`), so a full simulated day —
+and every alert condition — reliably occurs within a few real minutes. Start
+the backend a minute or two before presenting, not hours ahead: since
+`estimatedKwhToday` resets at each simulated day boundary, this doesn't cause
+runaway numbers, but very long-running dev sessions will cycle through many
+simulated days, which can make timestamps in the alerts panel look unusual
+(e.g. spanning several "days") even though the math is correct.

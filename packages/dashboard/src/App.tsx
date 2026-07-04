@@ -9,6 +9,7 @@ const WS_URL = import.meta.env.VITE_WS_URL ?? "ws://localhost:3001/ws";
 
 export default function App() {
   const { devices, usage, alerts, status } = useDeviceSocket({ url: WS_URL });
+  const hasData = devices.length > 0;
 
   return (
     <div className={styles.app}>
@@ -20,17 +21,27 @@ export default function App() {
         </span>
       </header>
 
-      <div className={styles.floorPlanRow}>
-        <OfficeFloorPlan devices={devices} />
-      </div>
+      {hasData ? (
+        <>
+          <div className={styles.floorPlanRow}>
+            <OfficeFloorPlan devices={devices} />
+          </div>
 
-      <main className={styles.main}>
-        <DeviceStatusPanel devices={devices} />
-        <div className={styles.sideColumn}>
-          <PowerMeter usage={usage} />
-          <AlertsPanel alerts={alerts} />
+          <main className={styles.main}>
+            <DeviceStatusPanel devices={devices} />
+            <div className={styles.sideColumn}>
+              <PowerMeter usage={usage} />
+              <AlertsPanel alerts={alerts} />
+            </div>
+          </main>
+        </>
+      ) : (
+        <div className={styles.loading} role="status">
+          {status === "closed"
+            ? "Can't reach the backend — retrying…"
+            : "Connecting to backend…"}
         </div>
-      </main>
+      )}
     </div>
   );
 }
