@@ -1,0 +1,88 @@
+.panel {
+  border: var(--border-width) solid var(--line-structural);
+  background: var(--bg-panel);
+  padding: var(--space-4);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: var(--border-width) solid var(--line-structural);
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.roomOutline {
+  fill: var(--bg-panel-raised);
+  stroke: var(--line-structural);
+  stroke-width: 1.5;
+}
+
+.roomLabel {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  fill: var(--accent-cyan);
+}
+
+.furniture rect,
+.furniture circle {
+  fill: none;
+  stroke: var(--line-structural-bright);
+  stroke-width: 1.5;
+  opacity: 0.6;
+}
+
+.fanHousing {
+  fill: var(--bg-base);
+  stroke: var(--line-structural-bright);
+  stroke-width: 1.5;
+}
+
+.fanBlades line {
+  stroke: var(--text-dim);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease;
+}
+
+g[data-status="on"] .fanBlades line {
+  stroke: var(--accent-on);
+}
+
+.spinning {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bulb {
+  fill: var(--bg-base);
+  stroke: var(--line-structural-bright);
+  stroke-width: 1.5;
+  transition: fill 0.3s ease, filter 0.3s ease;
+}
+
+.bulbOn {
+  fill: var(--accent-on);
+  stroke: var(--accent-on);
+  filter: drop-shadow(0 0 5px var(--accent-on-glow));
+}
