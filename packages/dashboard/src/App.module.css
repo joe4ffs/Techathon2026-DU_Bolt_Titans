@@ -50,6 +50,10 @@
   box-shadow: 0 0 6px 1px var(--accent-alert-glow);
 }
 
+.floorPlanRow {
+  margin-bottom: var(--space-5);
+}
+
 .main {
   display: grid;
   grid-template-columns: 2fr 1fr;

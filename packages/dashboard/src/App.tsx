@@ -1,4 +1,5 @@
 import { useDeviceSocket } from "./hooks/useDeviceSocket.js";
+import { OfficeFloorPlan } from "./components/OfficeFloorPlan.js";
 import { DeviceStatusPanel } from "./components/DeviceStatusPanel.js";
 import { PowerMeter } from "./components/PowerMeter.js";
 import { AlertsPanel } from "./components/AlertsPanel.js";
@@ -18,6 +19,10 @@ export default function App() {
           {status === "open" ? "LIVE" : status.toUpperCase()}
         </span>
       </header>
+
+      <div className={styles.floorPlanRow}>
+        <OfficeFloorPlan devices={devices} />
+      </div>
 
       <main className={styles.main}>
         <DeviceStatusPanel devices={devices} />
