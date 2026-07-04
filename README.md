@@ -54,6 +54,35 @@ npm run dev
 ```
 Open the URL Vite prints (typically `http://localhost:5173`).
 
+## Running the Discord bot
+
+**1. Create a Discord application and bot:**
+- Go to https://discord.com/developers/applications → **New Application**
+- Left sidebar → **Bot** → **Reset Token** → copy it (you'll only see it once)
+- Under **Privileged Gateway Intents**, enable **Message Content Intent** — the bot can't read command text without this
+- Left sidebar → **OAuth2** → **URL Generator** → check **bot** scope, then under Bot Permissions check **Send Messages** and **Read Message History** → copy the generated URL, open it, and invite the bot to your test server
+
+**2. Configure and run:**
+```bash
+cd packages/discord-bot
+cp .env.example .env
+```
+Edit `.env`:
+- `DISCORD_TOKEN` — the token from step 1
+- `BACKEND_URL` — defaults to `http://localhost:3001`, fine if the backend is running locally
+- `ANTHROPIC_API_KEY` — optional. Without it, the bot still works fully, just replies with plain factual text instead of LLM-humanized phrasing
+
+```bash
+npm run dev
+```
+
+**3. Try it** in your Discord server (with the backend also running):
+```
+!status
+!room work1
+!usage
+```
+
 ## Testing
 
 ```bash
