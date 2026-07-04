@@ -1,0 +1,19 @@
+{
+  "name": "office-monitor",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Real-time office device monitoring system: web dashboard + Discord bot sharing a single backend",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}
