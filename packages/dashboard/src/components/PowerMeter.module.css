@@ -1,0 +1,81 @@
+.panel {
+  border: var(--border-width) solid var(--line-structural);
+  background: var(--bg-panel);
+  padding: var(--space-4);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: var(--border-width) solid var(--line-structural);
+}
+
+.readout {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-family: var(--font-data);
+}
+
+.totalValue {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--accent-on);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.unit {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.kwh {
+  font-family: var(--font-data);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+}
+
+.roomBreakdown {
+  margin-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.roomRow {
+  display: grid;
+  grid-template-columns: 100px 1fr 60px;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-data);
+  font-size: 0.75rem;
+}
+
+.roomName {
+  color: var(--text-secondary);
+}
+
+.bar {
+  height: 6px;
+  background: var(--bg-base);
+  border: 1px solid var(--line-structural);
+}
+
+.barFill {
+  height: 100%;
+  background: var(--accent-on);
+  transition: width 0.4s ease;
+}
+
+.roomValue {
+  text-align: right;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
